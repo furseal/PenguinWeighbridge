@@ -19,16 +19,11 @@
 RTC_DS1307 RTC;
 
 void setup () {
-    Serial.begin(57600);
+    Serial.begin(9600);
     Wire.begin();
     RTC.begin();
 
-  if (! RTC.isrunning()) {
-    Serial.println("RTC is NOT running!");
-    // following line sets the RTC to the date & time this sketch was compiled
-    // uncomment it & upload to set the time, date and start run the RTC!
     RTC.adjust(DateTime(__DATE__, __TIME__));
-  }
 
 }
 
