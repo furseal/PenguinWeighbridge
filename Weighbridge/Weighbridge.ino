@@ -2,6 +2,7 @@
 // Weighbridge Operation Sketch
 
 // Created by Ben Pitcher (ben.pitcher@mq.edu.au)
+// Released under an MIT license (http://opensource.org/licenses/MIT).
 
 
 
