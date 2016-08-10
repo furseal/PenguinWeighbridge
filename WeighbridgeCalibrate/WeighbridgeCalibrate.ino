@@ -1,8 +1,9 @@
 // Penguin Weighbridge
 // Weighbridge Calibration Sketch
 
+// Ben Pitcher (ben.pitcher@mq.edu.au)
 // Originally created by Tony DiCola as part of the Smart Cocktail Shaker (https://github.com/tdicola/SmartCocktailShaker)
-// Released under an MIT license (http://opensource.org/licenses/MIT).
+// Released under a MIT license (http://opensource.org/licenses/MIT).
 
 // Configuration:
 #define ADC_PIN            0              // Set this to the analog input which is connected to the instrument amp output.
