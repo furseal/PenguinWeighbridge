@@ -1,4 +1,4 @@
-// Penguin Weighbridge Version 3
+// Penguin Weighbridge
 // Weighbridge Operation Sketch
 
 // Created by Ben Pitcher (ben.pitcher@mq.edu.au)
