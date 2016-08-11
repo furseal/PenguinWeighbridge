@@ -4,6 +4,7 @@
 // Created by Ben Pitcher (ben.pitcher@mq.edu.au)
 // Released under a MIT license (http://opensource.org/licenses/MIT).
 
+// This sketch is designed to be used with Arduino Uno style boards.
 
 
 // Libraries (Ensure all libraries are available prior to compiling sketch):
@@ -28,6 +29,8 @@
 
 #define tag                    16         // Set the number of characters in the RFID tag number (normally 16 characters for FDX-B/HDX animal identification transponder Output where the code is a 3 digit country code and a 12 digit ID seperated by an underscore).
 
+long tz =                      10;        // Set the timezone of the computer used to calibrate the RTC (e.g. UTC+10 = 10, UTC-2 = -2, UTC = 0).
+
 
 
 // Internal state used by the sketch (Do not alter):
@@ -37,6 +40,7 @@ char c;
 const int chipSelect = 10;
 File logfile;
 float sample = 0.0;
+long UTCtz = tz * 3600;
 
 
 
@@ -59,6 +63,8 @@ void setup()
   logfile = SD.open("logfile.csv", FILE_WRITE);
   
   DateTime now = rtc.now();
+  
+  long UTCnow = now.unixtime() - UTCtz;
 
   logfile.print("TIME, ");
   logfile.print("ID, ");
@@ -69,7 +75,7 @@ void setup()
     logfile.print(", ");
   }
   logfile.println();
-  logfile.print(now.unixtime());
+  logfile.print(UTCnow);
   logfile.print(", BOOT");
   for (int i = 0; i <= rep; i++)
   {logfile.print(", ");
@@ -87,13 +93,15 @@ void loop()
   // The system now sits listening for RFID chips to come into range. When a chip is detected the ID number and time are recorded. The system then reads and records the mass from the loadcell the specified number of times before waiting a specified period to begin listening for chips again.
   
   DateTime now = rtc.now();
+  
+  long UTCnow = now.unixtime() - UTCtz;
 
   if (RFID.available() > 0)
   {
 
     // Print information to SD Card
     logfile = SD.open("logfile.csv", FILE_WRITE);
-    logfile.print(now.unixtime());
+    logfile.print(UTCnow);
     logfile.print(", ");
 
     for (int i = 0; i <= tag; i++) 
